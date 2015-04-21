@@ -66,7 +66,8 @@ def set_record_ip(domain, record, ipaddr):
     headers = {'Content-Type': 'application/json'}
     headers.update(AUTH_HEADER)
 
-    req = urllib.request.Request(url, data, headers, method='PUT')
+    req = urllib.request.Request(url, data, headers)
+    req.get_method = lambda: 'PUT'
     fp = urllib.request.urlopen(req)
     mybytes = fp.read()
     html = mybytes.decode("utf8")
